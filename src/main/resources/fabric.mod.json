@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "quick-f3-fabric-mod",
+	"id": "quick-f3",
 	"version": "1.0.0",
-	"name": "quick-f3",
+	"name": "Quick F3",
 	"description": "A basic Fabric mod that shows a fairly customizable HUD that displays FPS and the Player's coordinates.",
 	"authors": [
 		"Me!"

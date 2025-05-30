@@ -1,6 +1,7 @@
 package com.mubi;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.item.Item;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ public class Quickf3 implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
+		My_Mod_item.initialize();
 		LOGGER.info("Hello Fabric world!");
+		
 	}
+
 }
