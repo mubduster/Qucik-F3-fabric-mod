@@ -25,24 +25,24 @@ public class Quickf3Client implements ClientModInitializer {
     
     private static boolean showCords = true; // variable to toggle the overlay
     
-    private static int count = 0; // variable to make sure that the overlay doesnt overlap with the F3 menu
+    private static boolean f3condition = true; // variable to make sure that the overlay doesnt overlap with the F3 menu
 
     private static void render(DrawContext context, RenderTickCounter tickCounter) {
-            
+    
             if (keyBinding.wasPressed()) { // checks for keypress F4 to toggle the overlay
                 showCords = !showCords;
             }
-
-            if (keyBindingF3.wasPressed()) { // checks for keypress F3 to toggle the overlay
-                if (count == 0) {  // to toggle off the overlay when the F3 menu is opened
+            else if (keyBindingF3.wasPressed()) { // checks for keypress F3 to toggle the overlay
+                if (f3condition ) {  // to toggle off the overlay when the F3 menu is opened
                     showCords = false;
-                    count += 1;
+                    f3condition = false;
                 }
                 else {             // to toggle on the overlay when the F3 menu is closed
                     showCords = true;
-                    count = 0 ;
+                    f3condition = true;
                 }
             }
+            
 
             if (showCords){ // rendering code for the overlay if overlay toggled
                 TextRenderer textRenderer= MinecraftClient.getInstance().textRenderer; // variable for initializing text rendering
