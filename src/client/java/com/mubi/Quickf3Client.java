@@ -1,37 +1,90 @@
 package com.mubi;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.math.MathHelper;
+
+import org.lwjgl.glfw.GLFW;
+
 
 public class Quickf3Client implements ClientModInitializer {
-    private static final Identifier EXAMPLE_LAYER = Identifier.of(Quickf3.MOD_ID, "hud-example-layer");
+
+    private static final Identifier Overlay = Identifier.of(Quickf3.MOD_ID, "hud");
+
+    private static KeyBinding keyBinding; // initializing variable for setting key bind F4
+    private static KeyBinding keyBindingF3; // initializing variable for setting key bind F3
     
+    private static boolean showCords = true; // variable to toggle the overlay
+    
+    private static int count = 0; // variable to make sure that the overlay doesnt overlap with the F3 menu
+
     private static void render(DrawContext context, RenderTickCounter tickCounter) {
-            TextRenderer textRenderer= MinecraftClient.getInstance().textRenderer;
-            ClientPlayerEntity player = MinecraftClient.getInstance().player;
-            double x = player.getX();
-            double y = player.getY();
-            double z = player.getZ();
+            
+            if (keyBinding.wasPressed()) { // checks for keypress F4 to toggle the overlay
+                showCords = !showCords;
+            }
 
-            String coords = String.format("X: %.0f, Y: %.0f, Z: %.0f", x, y, z);
+            if (keyBindingF3.wasPressed()) { // checks for keypress F3 to toggle the overlay
+                if (count == 0) {  // to toggle off the overlay when the F3 menu is opened
+                    showCords = false;
+                    count += 1;
+                }
+                else {             // to toggle on the overlay when the F3 menu is closed
+                    showCords = true;
+                    count = 0 ;
+                }
+            }
 
-            context.drawText(textRenderer, coords, 2, 5, 0x0000FF00, false);
+            if (showCords){ // rendering code for the overlay if overlay toggled
+                TextRenderer textRenderer= MinecraftClient.getInstance().textRenderer; // variable for initializing text rendering
+                ClientPlayerEntity player = MinecraftClient.getInstance().player; // variable for initializing player information function
+                double x = player.getX(); // x coordinate 64 bit float
+                double y = player.getY(); // y coordinate 64 bit float
+                double z = player.getZ(); // z coordinate 64 bit float
+
+                int fps = MinecraftClient.getInstance().getCurrentFps(); // initialize FPS variable
+                
+                context.fill( 0, 0, 145, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                context.drawBorder( 0, 0, 145, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
+
+                String coords = String.format("X: %.0f, Y: %.0f, Z: %.0f", x, y, z); // coordinates render format
+            
+                context.drawText(textRenderer, coords, 50, 5, 0x00FFFFFF, true); // renders coordinates
+
+                String FPS = String.format("FPS: "+fps); // FPS render format
+
+                context.drawText(textRenderer, FPS, 3, 5, 0x00FFFFFF, true); // renders FPS
+            }
+            
         }
 
     @Override
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
-        HudLayerRegistrationCallback.EVENT.register(layeredDrawer ->
-        layeredDrawer.attachLayerBefore(IdentifiedLayer.CHAT, EXAMPLE_LAYER, Quickf3Client::render));
+        HudLayerRegistrationCallback.EVENT.register(layeredDrawer ->            //initializes all rendering
+        layeredDrawer.attachLayerBefore(IdentifiedLayer.CHAT, Overlay, Quickf3Client::render));
+
+        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(  // initialized keybind F4
+            "key.Quickf3.press",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_F4,
+            "category.Quickf3.show"
+        ));
+
+        keyBindingF3 = KeyBindingHelper.registerKeyBinding(new KeyBinding(  //initializes keybind F3
+            "key.Quickf3.pressed",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_F3,
+            "category.Quickf3.unshow"
+        ));
     }
 }
