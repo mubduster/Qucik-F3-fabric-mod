@@ -1,0 +1,5 @@
+This is the first release of the mod. The mod is not complete as I still want to add some customizability to it. This is alpha 1.0.0 of the mod. Hope you like it.
+
+Controls:
+F4, toggles the overlay.
+Left Alt, toggles the modes of the overlay (default: show both FPS and coordinates; 2: show FPS only; 3: show coordinates only.)

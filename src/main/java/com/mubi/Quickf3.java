@@ -18,9 +18,7 @@ public class Quickf3 implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
-		My_Mod_item.initialize();
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("Quick-F3 loading xD.");
 		
 	}
 
