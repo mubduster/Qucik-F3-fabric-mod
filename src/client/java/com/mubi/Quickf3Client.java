@@ -69,35 +69,60 @@ public class Quickf3Client implements ClientModInitializer {
                 double z = player.getZ(); // z coordinate 64 bit float
 
                 int fps = MinecraftClient.getInstance().getCurrentFps(); // initialize FPS variable
-                if (mode == 2){
-                    context.fill( 0, 0, 50, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
-                    context.drawBorder( 0, 0, 50, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
-                }
-                else if (mode == 3){
-                    context.fill( 0, 0, 110, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
-                    context.drawBorder( 0, 0, 110, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
-                }
-                else if (mode == 1){
-                    context.fill( 0, 0, 165, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
-                    context.drawBorder( 0, 0, 165, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
-                }
+                //if (mode == 2){
+                //    context.fill( 0, 0, 50, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                //    context.drawBorder( 0, 0, 50, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
+                //}
+                //else if (mode == 3){
+                //    context.fill( 0, 0, 110, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                //    context.drawBorder( 0, 0, 110, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
+                //}
+                //else if (mode == 1){
+                //    context.fill( 0, 0, 165, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                //    context.drawBorder( 0, 0, 165, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
+                //}
                 
                 if (mode == 1){
                     String coords = String.format("X: %.0f, Y: %.0f, Z: %.0f", x, y, z); // coordinates render format
 
-                    context.drawText(textRenderer, coords, 50, 5, 0x00FFFFFF, true); // renders coordinates
-
                     String FPS = String.format("FPS: "+fps); // FPS render format
+                        
+                    int weidth = textRenderer.getWidth(coords+FPS);
 
-                    context.drawText(textRenderer, FPS, 3, 5, 0x00FFFFFF, true); // renders FPS
+                    if (!(textRenderer.getWidth(FPS) >= 40)){
+                        context.fill( 0, 0, weidth+25, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                        context.drawBorder( 0, 0, weidth+25, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)                   }
+                        
+                        context.drawText(textRenderer, coords, 50, 5, 0x00FFFFFF, true); // renders coordinates
+    
+                        context.drawText(textRenderer, FPS, 3, 5, 0x00FFFFFF, true); // renders FPS
+                    }
+                    else{
+                        context.fill( 0, 0, weidth+Math.round((float)((weidth-textRenderer.getWidth(coords))/1.5)), 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                        context.drawBorder( 0, 0, Math.round((float) (weidth+(((weidth-textRenderer.getWidth(coords)))/1.5))), 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)                   }
+                        
+                        context.drawText(textRenderer, coords, 50+((weidth-textRenderer.getWidth(coords))/4), 5, 0x00FFFFFF, true); // renders coordinates
+    
+                        context.drawText(textRenderer, FPS, 3, 5, 0x00FFFFFF, true); // renders FPS
+                    }
                 }
                 else if (mode == 2){
                     String FPS = String.format("FPS: "+fps); // FPS render format
+
+                    int weidth= textRenderer.getWidth(FPS) ;
+
+                    context.fill( 0, 0, weidth+10, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                    context.drawBorder( 0, 0, weidth+10, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
 
                     context.drawText(textRenderer, FPS, 3, 5, 0x00FFFFFF, true); // renders FPS
                 }
                 else if (mode == 3 ){
                     String coords = String.format("X: %.0f, Y: %.0f, Z: %.0f", x, y, z); // coordinates render format
+
+                    int weidth= textRenderer.getWidth(coords) ;
+
+                    context.fill( 0, 0, weidth+10, 17, 0 ,0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, z(which layer is this on), colour).
+                    context.drawBorder( 0, 0, weidth+10, 17, 0x88444444); // This renders the outline for background.These lengths corrispond to the lenghts of fill, and x, y are is position. (x, y, weidth, height, colour)
 
                     context.drawText(textRenderer, coords, 3, 5, 0x00FFFFFF, true); // renders coordinates
                 }
