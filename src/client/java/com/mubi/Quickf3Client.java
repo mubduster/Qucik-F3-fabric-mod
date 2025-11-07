@@ -68,27 +68,26 @@ public class Quickf3Client implements ClientModInitializer {
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
 
-        //private static final KeyBinding.Category
-        //keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(  // initialized keybind F4
-          //      "Toggle QuickF3 HUD",
-            //    InputUtil.Type.KEYSYM,
-              //  GLFW.GLFW_KEY_F4,
-                //"category.Quickf3"
-        //));
+        keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(  // initialized keybind F4
+                "Toggle QuickF3 HUD",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_F4,
+                "category.Quickf3"
+        ));
 
-        //keyBindingF3 = KeyBindingHelper.registerKeyBinding(new KeyBinding(  //initializes keybind F3
-          //      "Hide QuickF3  HUD",
-            //    InputUtil.Type.KEYSYM,
-              //  GLFW.GLFW_KEY_F3,
-                //"category.Quickf3"
-        //));
+        keyBindingF3 = KeyBindingHelper.registerKeyBinding(new KeyBinding(  //initializes keybind F3
+                "Hide QuickF3  HUD",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_F3,
+                "category.Quickf3"
+        ));
 
-        //keyBindingmode = KeyBindingHelper.registerKeyBinding(new KeyBinding(  //initialize keybind left Alt
-          //      "Change QuickF3  modes",
-            //    InputUtil.Type.KEYSYM,
-              //  GLFW.GLFW_KEY_LEFT_ALT,
-                //"category.Quickf3"
-        //));
+        keyBindingmode = KeyBindingHelper.registerKeyBinding(new KeyBinding(  //initialize keybind left Alt
+                "Change QuickF3  modes",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_LEFT_ALT,
+                "category.Quickf3"
+        ));
 
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             render();
@@ -118,7 +117,7 @@ public class Quickf3Client implements ClientModInitializer {
 
                             context.fill(0, 0, width + 25, 17, 0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, y1, x2, y2, colour).
 
-                            //context.drawStrokedRectangle(0, 0, width + 25, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)                   }
+                            context.drawBorder(0, 0, width + 25, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)                   }
 
 
                             context.drawText(textRenderer, FPS, 3, 5, 0xFFFFFFFF, true); // renders FPS
@@ -133,7 +132,7 @@ public class Quickf3Client implements ClientModInitializer {
                             int width = textRenderer.getWidth(FPS);
                             context.fill(0, 0, width + 10, 17, 0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, colour).
 
-                            //context.drawBorder(0, 0, width + 10, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)
+                            context.drawBorder(0, 0, width + 10, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)
 
                             context.drawText(textRenderer, FPS, 3, 5, 0xFFFFFFFF, true); // renders FPS
 
@@ -145,7 +144,7 @@ public class Quickf3Client implements ClientModInitializer {
 
                             context.fill(0, 0, width + 14, 17, 0x77333333); // This renders the background. Remember x and y graph is flipped for some reason. (x1, x2, y1, y2, colour).
 
-                            //context.drawBorder(0, 0, width + 14, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)
+                            context.drawBorder(0, 0, width + 14, 17, 0x88444444); // This renders the outline for background.These lengths correspond to the lengths of fill, and x, y are is position. (x, y, width, height, colour)
 
                             context.drawText(textRenderer, coords, 3, 5, 0xFFFFFFFF, true); // renders coordinates
 
