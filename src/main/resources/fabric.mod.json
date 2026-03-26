@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "quick-f3",
 	"version": "${version}",
-	"name": "QUick F3",
+	"name": "quick-f3",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"Me!"
@@ -16,13 +16,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "com.mubi.QuickF3"
+			"com.mubi.Quickf3"
 		],
 		"client": [
-          "com.mubi.QuickF3Client"
+			"com.mubi.Quickf3Client"
 		],
 		"fabric-datagen": [
-          "com.mubi.QuickF3DataGenerator"
+			"com.mubi.Quickf3DataGenerator"
 		]
 	},
 	"mixins": [
@@ -33,12 +33,9 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.17.3",
-		"minecraft": "~1.21.10",
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
