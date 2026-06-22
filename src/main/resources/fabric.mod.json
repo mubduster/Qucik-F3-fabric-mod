@@ -19,10 +19,10 @@
 			"com.mubi.Quickf3"
 		],
 		"client": [
-			"com.mubi.Quickf3Client"
+			"com.mubi.client.Quickf3Client"
 		],
 		"fabric-datagen": [
-			"com.mubi.Quickf3DataGenerator"
+			"com.mubi.client.Quickf3DataGenerator"
 		]
 	},
 	"mixins": [
@@ -33,9 +33,9 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.18.4",
-		"minecraft": "~1.21.11",
-		"java": ">=21",
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
 		"fabric-api": "*"
 	}
 }
